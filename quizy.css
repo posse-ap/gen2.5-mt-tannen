@@ -1,9 +1,14 @@
+body{
+  font-family: Hiragino Kaku Gothic ProN,-apple-system,BlinkMacSystemFont,Hiragino Sans,æ¸¸ã‚´ã‚·ãƒƒã‚¯ Medium,meiryo,sans-serif;
+}
+
 .QuizBig {
   width: 600px;
   margin: 10px auto;
 }
 
 .Question {
+  font-family: Hiragino Kaku Gothic ProN,-apple-system,BlinkMacSystemFont,Hiragino Sans,æ¸¸ã‚´ã‚·ãƒƒã‚¯ Medium,meiryo,sans-serif;
   font-size: 17px;
   line-height: 20px;
   font-weight: 600;
