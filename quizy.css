@@ -1,39 +1,39 @@
-body{
-  font-family: Hiragino Kaku Gothic ProN,-apple-system,BlinkMacSystemFont,Hiragino Sans,æ¸¸ã‚´ã‚·ãƒƒã‚¯ Medium,meiryo,sans-serif;
+body {
+    font-family: Hiragino Kaku Gothic ProN, -apple-system, BlinkMacSystemFont, Hiragino Sans, æ¸¸ã‚´ã‚·ãƒƒã‚¯ Medium, meiryo, sans-serif;
 }
 
-.QuizBig {
-  width: 600px;
-  margin: 10px auto;
+.quizBig {
+    width: 600px;
+    margin: 10px auto;
 }
 
-.Question {
-  font-family: Hiragino Kaku Gothic ProN,-apple-system,BlinkMacSystemFont,Hiragino Sans,æ¸¸ã‚´ã‚·ãƒƒã‚¯ Medium,meiryo,sans-serif;
-  font-size: 17px;
-  line-height: 20px;
-  font-weight: 600;
-  display: inline-block;
+.question {
+    font-family: Hiragino Kaku Gothic ProN, -apple-system, BlinkMacSystemFont, Hiragino Sans, æ¸¸ã‚´ã‚·ãƒƒã‚¯ Medium, meiryo, sans-serif;
+    font-size: 17px;
+    line-height: 20px;
+    font-weight: 600;
+    display: inline-block;
 }
 
-.Question::after{
-  display: block;
-  margin-top: 10px;
-  width: 90pt;
-  height: 2px;
-  background: #00ab36;
-  content: '';
+.question::after {
+    display: block;
+    margin-top: 10px;
+    width: 90pt;
+    height: 2px;
+    background: #00ab36;
+    content: '';
 }
 
-.QuizPhoto {
-  width: 100%;
+.quizPhoto {
+    width: 100%;
 }
 
-.Table{
-  width: 100%;
-  display: block;
-  border: 1px solid #ebebeb;
-  padding: 13px;
-  margin: 10px 0;
-  font-weight: 600;
-  box-shadow: 0 3px 2px -2px #EBEBEB;
+.table {
+    width: 100%;
+    display: block;
+    border: 1px solid #ebebeb;
+    padding: 13px;
+    margin: 10px 0;
+    font-weight: 600;
+    box-shadow: 0 3px 2px -2px #EBEBEB;
 }

@@ -2,28 +2,30 @@
 <html lang="ja">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quizy仮</title>
-  <link rel="stylesheet" href="reset.css">
-  <link rel="stylesheet" href="quizy.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizy仮</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="quizy.css">
+    <script src="quizy.js"></script>
 </head>
 
 <body>
-  <main>
-    <section class="QuizBig">
-      <h2 class="Question">1.この地名はなんて読む？</h2>
-      <img class="QuizPhoto" src="高輪.png" alt="高い輪？">
-      <ul>
-        <li class="Table">こうわ</li>
-        <li class="Table">たかなわ</li>
-        <li class="Table">HIGH-RING</li>
-      </ul>
-    </section>
+    <main>
+        <section class="quizBig">
+            <h2 class="question">1.この地名はなんて読む？</h2>
+            <img class="quizPhoto" src="高輪.png" alt="高い輪？">
+            <ul>
+                <li class="table" id="table_one" onclick="ans(1, 1, 2)">こうわ</li>
+                <li class="table" id="table_two" onclick="ans(1, 2, 2) ">たかなわ</li>
+                <li class="table" id="table_three" onclick="ans(1, 3, 2)">HIGH-RING</li>
+            </ul>
+            <div class="correct_message"></div>
+        </section>
 
 
-  </main>
+    </main>
 
 </body>
 
