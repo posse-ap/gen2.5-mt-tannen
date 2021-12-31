@@ -37,3 +37,42 @@ body {
     font-weight: 600;
     box-shadow: 0 3px 2px -2px #EBEBEB;
 }
+
+.message_delete {
+    display: none;
+}
+
+.correct_message,
+.incorrect_message {
+    background-color: #f5f5f5;
+    padding: 17px;
+    border-radius: 3px;
+}
+
+.correct_message h3,
+.incorrect_message h3 {
+    font-weight: bolder;
+}
+
+.correct_message h3::after,
+.incorrect_message h3::after {
+    display: block;
+    margin: 5px 0;
+    width: 40pt;
+    height: 2px;
+    content: '';
+}
+
+.correct_message h3::after,
+.incorrect_message h3::after {
+    background: #287dff;
+}
+
+.correct_message p,
+.incorrect_message p {
+    margin-top: 15px;
+}
+
+.incorrect_message h3::after {
+    background: #ff5128;
+}
