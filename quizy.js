@@ -10,6 +10,8 @@ function ans(quiz_num, option_num, correct_num)
         document.getElementById("table_two").style.background = "#287dff";
         document.getElementById("table_two").style.color = "white";
         document.getElementById("correct_text").classList.remove("message_delete");
+        document.getElementById("table_one").style.pointerEvents = "none"
+        document.getElementById("table_three").style.pointerEvents = "none"
     }
     // 不正解の時の処理
     else if (option_num == 1) {
@@ -18,12 +20,16 @@ function ans(quiz_num, option_num, correct_num)
         document.getElementById("table_one").style.background = "#ff5128";
         document.getElementById("table_one").style.color = "white";
         document.getElementById("incorrect_text").classList.remove("message_delete");
+        document.getElementById("table_two").style.pointerEvents = "none"
+        document.getElementById("table_three").style.pointerEvents = "none"
     } else if (option_num == 3) {
         document.getElementById("table_two").style.background = "#287dff";
         document.getElementById("table_two").style.color = "white";
         document.getElementById("table_three").style.background = "#ff5128";
         document.getElementById("table_three").style.color = "white";
         document.getElementById("incorrect_text").classList.remove("message_delete");
+        document.getElementById("table_one").style.pointerEvents = "none"
+        document.getElementById("table_two").style.pointerEvents = "none"
     }
 }
 
