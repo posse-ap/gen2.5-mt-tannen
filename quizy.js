@@ -104,19 +104,18 @@ function randomlist() {
         //↑答えは一番前のやつだよということを確認させておく
 
         for (var i = question.length - 1; i > 0; i--) {
-            var r = Math.floor(Math.random() * (i + 1));
-            var tmp = question[i];
-            question[i] = question[r];
-            question[r] = tmp;
+            var j = Math.floor(Math.random() * (i + 1)); //random index
+            [question[i], question[j]] = [question[j], question[i]]; // 並べ替え
         }
-        // 配列をシャッフル（Fisher-Yates shuffle）
 
-        // 問題リストと回答番号を設定して問題のHTML生成処理を呼び出す
-        createquestion(index + 1, question, question.indexOf(answer) + 1);
+        // 配列をシャッフル（Fisher-Yates shuffle）→調べてコピペした
+
+        newquestion(index + 1, question, question.indexOf(answer) + 1);
+        //問題番号,問題,問題の番号→指定した問題を生成
     });
-}
 
+}
 
 randomlist();
 
-//answerlistとquestionlistの関係性
+//answerlistとquestionlistの関係性さえわかれば最強
