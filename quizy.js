@@ -117,5 +117,3 @@ function randomlist() {
 }
 
 randomlist();
-
-//answerlistとquestionlistの関係性さえわかれば最強
