@@ -1,9 +1,27 @@
 'use strict';
 
+// const twitter = document.getElementById("twitter");
+
 document.getElementById("loader").onclick = function() {
-    document.getElementById("load").classList.remove("none");
-    console.log("ok");
+    if (twitter.checked) {
+        var left = Math.round(window.screen.width / 2 - 275);
+        var top = (window.screen.height > 420) ? Math.round(window.screen.height / 2 - 210) : 0;
+        window.open(
+            "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.getElementById("twitter").value),
+            null,
+            "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + left + ",top=" + top);
+    } else {
+        document.getElementById("load").classList.remove("none");
+        console.log("ok");
+        setTimeout(change, 3000);
+    };
 };
+
+function change() {
+    document.getElementById("load").classList.add("none");
+    document.getElementById("complete").classList.remove("none")
+};
+
 
 function bar() {
     var ctx = document.getElementById("bar").getContext('2d');
@@ -20,12 +38,10 @@ function bar() {
         options: {
             // オプション
             responsive: false, // canvasサイズ自動設定機能を使わない。HTMLで指定したサイズに固定
-            title: { // タイトル
-                display: false, // 表示設定
-            },
-
-            legend: { // 凡例
-                display: false // 表示の有無
+            plugins: {
+                legend: { // 凡例の非表示
+                    display: false
+                }
             },
             scales: {
                 x: {

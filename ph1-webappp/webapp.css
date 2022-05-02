@@ -6,6 +6,11 @@ header {
     padding: 0.5%;
 }
 
+.top {
+    display: flex;
+    justify-content: space-around;
+}
+
 .logo,
 .week {
     display: flex;
@@ -23,6 +28,9 @@ header {
     color: #97b9d1;
     height: 30%;
 }
+
+
+/* モーダルボタン */
 
 .my_modal_btn {
     display: flex;
@@ -62,8 +70,6 @@ header {
     overflow-scrolling: touch;
     /* お好みで */
     width: 90%;
-    max-height: 80%;
-    max-width: 600px;
 }
 
 
@@ -94,6 +100,8 @@ header {
     height: 20px;
     position: relative;
     cursor: pointer;
+    background-color: #f5f5f8;
+    border-radius: 50%;
 }
 
 .my_modal_close_icon span::before,
@@ -106,7 +114,7 @@ header {
     width: 84%;
     height: 16%;
     margin: -8% 0 0 -42%;
-    background: #111;
+    background: #aaa;
 }
 
 .my_modal_close_icon span::before {
@@ -210,6 +218,9 @@ input[type="date"] {
     display: none;
 }
 
+
+/* ローダー */
+
 .loader {
     color: #ffffff;
     font-size: 11px;
@@ -278,20 +289,71 @@ input[type="date"] {
     }
 }
 
+
+/* モーダルの細かい見た目 */
+
+.modal_index12345 {
+    display: flex;
+    justify-content: space-around;
+}
+
+.modal_index12 {
+    width: 40%;
+}
+
+.modal_index p,
+.modal_index1 p,
+.modal_index2 p,
+.modal_index3 p,
+.modal_index4 p {
+    font-weight: bold;
+}
+
+.write {
+    height: 10%;
+    padding: 10px;
+}
+
+.twitter {
+    margin: 10% 0;
+}
+
+.modal_index6 {
+    text-align: center;
+    padding: 10px 0;
+    margin: 10px auto;
+    border-radius: 30px;
+    color: #fff;
+    background: linear-gradient(#0f71bc, #3ccfff);
+    height: 30%;
+}
+
+
+/* チェックマーク */
+
+
+/* こっからメイン */
+
 .main {
     background-color: #f5f5f8;
 }
 
-.timeData {
-    width: 50%;
-}
-
-.top,
-.data,
-.timeData_date,
-.studyData {
+.data {
     display: flex;
     justify-content: space-around;
+}
+
+.timeData {
+    width: 45%;
+}
+
+.timeData_date {
+    display: flex;
+    justify-content: space-between;
+}
+
+.studyData {
+    display: flex;
 }
 
 .timeData_today,
@@ -302,6 +364,7 @@ input[type="date"] {
     box-shadow: 10px;
     padding: 10px;
     margin: 16px;
+    width: 33%;
 }
 
 .index {
@@ -315,6 +378,29 @@ input[type="date"] {
     text-align: center;
 }
 
+.timeData_bar {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 10px;
+    padding: 10px;
+    margin: 16px;
+}
+
+.studyData_fig {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 10px;
+    padding: 10px;
+    margin: 16px;
+}
+
+.studyData_fig p {
+    font-weight: bold;
+}
+
+
+/* 下のやつ */
+
 .hour {
     color: #97b9d1;
     text-align: center;
@@ -323,10 +409,10 @@ input[type="date"] {
 .under {
     display: flex;
     justify-content: center;
-    margin: 100px;
+    margin: 50px;
 }
 
-.left {
+*/ .left {
     color: #0f71bc;
     font-weight: 2px;
 }
