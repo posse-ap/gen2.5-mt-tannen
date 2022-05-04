@@ -19,7 +19,8 @@ document.getElementById("loader").onclick = function() {
 
 function change() {
     document.getElementById("load").classList.add("none");
-    document.getElementById("complete").classList.remove("none")
+    document.getElementById("my_modal_content").classList.add("none");
+    document.getElementById("complete").classList.remove("none");
 };
 
 
