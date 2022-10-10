@@ -7,7 +7,7 @@ var question_list = new Array();
 //配列の中身を指定する
 //pushにすることで問題を足したいときに付け足すことができる
 
-question_list.push(['たかなわ', 'こうわ', 'たかわ']);
+question_list.push(['たかなわ', 'こうわ', 'たかわ'], ['かめいど', 'かめと', 'かめど']);
 
 console.log(
     question_list
@@ -68,12 +68,13 @@ function check(quiz_id, selected_id, correct_id) {
 //問題のhtml作成
 
 function newquestion(quiz_id, select_list, correct_id) {
+    var quiz_num = document.getElementById(quiz_id);
     var contents = '<section class="quizBig">' +
         '<h2>' + quiz_num + '. この地名はなんて読む？</h2>' +
         '<img src ="img/' + quiz_num + '.png">'
         //↑問題文の型
 
-    select_list.forEach(function(selection, index)
+    question_list.forEach(function(selection, index)
         //forEachのコールバック関数で、 selection_listのなかの要素selectionとその番号indexを使うぜ！ってこと
         {
             contents += '<li id="answerlist_' + quiz_id + '_' + (index + 1) + '" name="answerlist_' + quiz_id + '" class="answerlist" ' +
@@ -90,17 +91,21 @@ function newquestion(quiz_id, select_list, correct_id) {
                 '<span id="answertext_' + quiz_id + '"></span><br>' +
                 '<span>正解は「' + select_list[correct_id - 1] + '」です！</span>' + '</li>' + '</ul>' + '</div >';
             //解答の型。選択肢の配列の中で、
-            document.getElementById('main').insertAdjacentHTML('beforeend', contents);
+            // document.getElementById('main').insertAdjacentHTML('beforeend', contents);
         });
+    document.getElementById('main').insertAdjacentHTML('beforeend', contents);
 };
 
-newquestion();
-//問題を出す
+// newquestion(1, 1, 1);
+// //問題を出す
 
 function randomlist() {
     question_list.forEach(function(question, index) {
+
         // question_listは一番最初にやったやつ
-        answer = question[0];
+        let answer = question[0];
+        // console.log(question[0]);
+        console.log(answer);
         //↑答えは一番前のやつだよということを確認させておく
 
         for (var i = question.length - 1; i > 0; i--) {
