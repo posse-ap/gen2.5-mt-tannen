@@ -13,8 +13,8 @@ services:
   php:
     platform: linux/amd64
     build: ./php
-    # depends_on:
-    #   - db
+    depends_on:
+      - db
     volumes:
       - ./src/html:/var/www/html
   db:
