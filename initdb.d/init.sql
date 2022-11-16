@@ -1,8 +1,4 @@
-DROP SCHEMA IF EXISTS quizy;
-
-CREATE SCHEMA quizy;
-
-USE quizy;
+USE posse;
 
 CREATE TABLE big_questions (
   id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
