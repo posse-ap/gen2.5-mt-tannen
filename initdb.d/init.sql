@@ -1,5 +1,7 @@
 USE posse;
 
+DROP TABLE IF EXISTS big_questions;
+
 CREATE TABLE big_questions (
   id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   name VARCHAR(255) NOT NULL
@@ -28,13 +30,13 @@ VALUES
 DROP TABLE IF EXISTS choices;
 CREATE TABLE choices (
   id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  quistion_id INT NOT NULL,
+  question_id INT NOT NULL,
   name VARCHAR(255) NOT NULL,
   valid BOOLEAN NOT NULL
 );
 
 INSERT INTO choices
-(quistion_id, name, valid)
+(question_id, name, valid)
 VALUES
   (1, "たかなわ", 1),
   (1, "たかわ", 0),
@@ -45,4 +47,3 @@ VALUES
   (3, "むこうひら", 0),
   (3, "むかいこうじ", 0),
   (3, "むかいなだ", 1);
-
