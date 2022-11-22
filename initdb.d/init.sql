@@ -11,7 +11,7 @@ CREATE TABLE records (
 );
 
 INSERT INTO
-  big_questions (date, hour, language_id, content_id)
+  records (date, hour, language_id, content_id)
 VALUES
   (2022-11-03, 7, 3, 2),
   (2022-11-05, 2, 3, 3),
