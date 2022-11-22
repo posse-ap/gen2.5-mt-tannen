@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="webapp.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <div class="top">
+            <div class="logo"><img src="./webapp.img/posseLogo.jpg" alt="posseLogo"></div>
+            <div class="week">
+                <p>4th week</p>
+            </div>
+        </div>
+        <label class="my_modal_btn" for="my_modal1">記録・投稿</label>
+        <!-- チェックボックスラベル -->
+        <input type="checkbox" id="my_modal1">
+        <!-- 非表示チェックボックス -->
+        <label class="my_modal_overlay" for="my_modal1"></label>
+        <!-- オーバーレイ -->
+        <div class="my_modal_body1">
+            <div class="my_modal_header">
+                <label class="my_modal_close" for="my_modal1"><div class="my_modal_close_icon"><span></span></div></label>
+                <!-- 閉じるボタン -->
+            </div>
+
+            <section class="my_modal" id="my_modal">
+                <section class="my_modal_content" id="my_modal_content">
+                    <!-- モーダル内コンテンツ -->
+                    <section class="modal_index12345">
+                        <section class="modal_index12">
+                            <div class="modal_index">
+                                <p>学習日</p>
+                            </div>
+                            <div><label class="date-edit"><input type="date" value="2019-08-22" /></label></div>
+                            <div class="modal_index1">
+                                <p>学習コンテンツ（複数選択可）</p>
+                                <div class="container">
+
+                                    <!-- 選択肢のテキスト「りんご」、「ぶどう」「みかん」をlabelタグで囲みます。for属性の値を input タグの id 属性の値と同じにする事でラベルのテキストとチェックボックスを紐づけています。 -->
+                                    <input type="checkbox" name="detail" value="nyobi" id="nyobi">
+                                    <label for="nyobi" class="label custom-style">N予備校</label>
+                                    <input type="checkbox" name="detail" value="dotin" id="dotin">
+                                    <label for="dotin" class="label custom-style">ドットインストール</label>
+                                    <input type="checkbox" name="detail" value="task" id="task">
+                                    <label for="task" class="label custom-style">POSSE課題</label>
+                                </div>
+                            </div>
+                            <div class="modal_index2">
+                                <p>学習言語（複数選択可）</p>
+                                <div class="container">
+                                    <input type="checkbox" name="detail" value="html" id="html">
+                                    <label for="html" class="label custom-style">html</label>
+                                    <input type="checkbox" name="detail" value="css" id="css">
+                                    <label for="css" class="label custom-style">css</label>
+                                    <input type="checkbox" name="detail" value="js" id="js">
+                                    <label for="js" class="label custom-style">JavaScript</label>
+                                    <input type="checkbox" name="detail" value="php" id="php">
+                                    <label for="php" class="label custom-style">PHP</label>
+                                    <input type="checkbox" name="detail" value="laravel" id="laravel">
+                                    <label for="laravel" class="label custom-style">Laravel</label>
+                                    <input type="checkbox" name="detail" value="sql" id="sql">
+                                    <label for="sql" class="label custom-style">SQL</label>
+                                    <input type="checkbox" name="detail" value="shell" id="shell">
+                                    <label for="shell" class="label custom-style">SHELL</label>
+                                    <input type="checkbox" name="detail" value="basic" id="basic">
+                                    <label for="basic" class="label custom-style">情報システム基礎知識（その他）</label>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="modal_index345">
+                            <div class="modal_index3">
+                                <p>学習時間</p>
+                                <input type="text" name="example" class="write" placeholder="ここにテキストを入力">
+                            </div>
+                            <div class="modal_index4">
+                                <p>Twitter用コメント</p>
+                                <input type="text" name="example" class="write" placeholder="ここにテキストを入力">
+                            </div>
+                            <div class="modal_index5">
+                                <label>
+                        <input type="checkbox" name="twitter" value="twitter" id="twitter" class="twitter">
+                        Twitterにシェアする
+                      </label>
+                            </div>
+                        </section>
+                    </section>
+                    <div class="modal_index6" id="loader">記録・投稿</div>
+                    <div class="loader none" id="load">
+                    </div>
+                </section>
+                <div class="complete none" id="complete">
+                    <div class="awesome_pic"><img src="./webapp.img/awesome.png" alt="awesome"></div>
+                    <div class="complete_message">
+                        <p>記録・投稿<br>完了しました</p>
+                    </div>
+                </div>
+            </section>
+    </header>
+    <main class="main">
+        <section class="data">
+            <section class="timeData">
+                <div class="timeData_date">
+                    <div class="timeData_today">
+                        <p class="index">today</p><br>
+                        <p class="figure">3</p><br>
+                        <p class="hour
+                        ">hour</p>
+                    </div>
+                    <div class="timeData_month">
+                        <p class="index">month</p><br>
+                        <p class="figure
+                        ">120</p><br>
+                        <p class="hour
+                        ">hour</p>
+                    </div>
+                    <div class="timeData_total">
+                        <p class="index
+                        ">total</p><br>
+                        <p class="figure
+                        ">1348</p><br>
+                        <p class="hour
+                        ">hour</p>
+                    </div>
+                </div>
+                <div class="timeData_bar">
+                    <canvas width="600" height="400" id="bar"></canvas>
+                </div>
+            </section>
+            <section class="studyData">
+                <div class="studyData_fig">
+                    <p>学習言語</p>k
+                    <canvas width="300" height="700" id="doughnut"></canvas>
+                </div>
+                <div class="studyData_fig">
+                    <p>学習コンテンツ</p>
+                    <canvas width="300" height="700" id="nutnut"></canvas>
+                </div>
+            </section>
+        </section>
+        <section class="under">
+            <div class="left">&lt;</div>
+            <div> 　　　2020年10月 　　　</div>
+            <div class="right">&gt;</div>
+        </section>
+        <section class="sp_modal">
+            <label class="sp_modal_btn" for="my_modal1">記録・投稿</label>
+            <!-- チェックボックスラベル -->
+            <input type="checkbox" id="sp_modal_btn">
+            <!-- 非表示チェックボックス -->
+        </section>
+    </main>
+    <script src="./webapp.js"></script>
+</body>
+
+</html>
