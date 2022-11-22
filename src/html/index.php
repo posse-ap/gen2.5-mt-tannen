@@ -19,11 +19,7 @@ $big_questions = $stmt->fetchAll();
 
 <body>
     <div>
-    <?php foreach ($big_questions as $big_question) : ?>
-    <p>
-      <a href="/quiz.php?id=<?php echo $big_question['id']; ?>"><?php echo $big_question['id'] . '：' . $big_question['name']; ?></a>
-    </p>
-  <?php endforeach; ?>
+    
         <script src="./quizy.js"></script>
     </div>
 </body>

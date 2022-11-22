@@ -1,83 +1,481 @@
-body {
-    margin: 0 auto;
-    width: 570px;
-    margin-top: 90px;
-    margin-bottom: 90px;
+.header {
+    background-color: white;
+    display: grid;
+    grid-template-columns: 10rem 10rem auto 25rem;
+    grid-template-rows: 6.4rem;
+    margin-bottom: 2rem;
+    padding-left: 4rem;
 }
 
-
-/* サイト全体のcss */
-
-.quiz {
-    margin-top: 20px;
+.header__logo {
+    grid-column: 1/2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.quiz h2 {
-    font-size: 16px;
-    display: inline;
-    background: linear-gradient(transparent 70%, #f7ff4e 0);
-}
-
-.quiz img {
+.header__logo img {
+    height: auto;
     width: 100%;
-    margin: 0 auto 0;
 }
 
-.quiz ul {
-    list-style: none;
-    margin: 10px 0;
-    padding: 12px 0;
+.header__week {
+    grid-column: 2/3;
+    text-align: center;
+    vertical-align: middle;
 }
 
-.quiz li {
+.header__week span {
+    font-size: 1.2rem;
+    line-height: 6.4rem;
+    color: #75bcff;
+}
+
+.header__submit {
+    grid-column: 4/5;
+    padding: 1.2rem 0;
+}
+
+
+/* =====================
+  topPage
+  ===================== */
+
+.main .container {
+    margin: 0 auto;
+    width: 120rem;
+    display: grid;
+    grid-template-columns: 18rem 2rem 18rem 2rem 18rem 2rem 29rem 2rem 29rem;
+    grid-template-rows: 13rem 2rem 40rem auto;
+}
+
+.main .container .record {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: -0.1rem 0.1rem 5px -3px gray;
+    text-align: center;
+    padding: 2rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.main .container .record__title {
+    color: #8ba4f7;
+    padding-bottom: 1rem;
+}
+
+.main .container .record__hour {
+    font-size: 1.5rem;
+    color: #e2e2e2;
+}
+
+.main .container .record input {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 1rem;
+    font-size: 3rem;
+}
+
+.main .container .record .option__list {
+    text-align: left;
+}
+
+.main .container .record .option__item {
+    display: inline;
+    line-height: 3.5rem;
+    font-size: 1.3rem;
+    font-weight: lighter;
+}
+
+.main .container .record .circle {
+    transform: translateY(0.3rem);
+    margin-left: 1rem;
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+}
+
+.main .container .today__number {
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+.main .container .month__number {
+    grid-column: 3/4;
+    grid-row: 1/2;
+}
+
+.main .container .total__number {
+    grid-column: 5/6;
+    grid-row: 1/2;
+}
+
+.main .container .month__report {
+    grid-column: 1/6;
+    grid-row: 3/4;
+}
+
+.main .container .languages__report {
+    grid-column: 7/8;
+    grid-row: 1/4;
+}
+
+.main .container .contents__report {
+    grid-column: 9/10;
+    grid-row: 1/4;
+}
+
+.main .container .graph__title {
+    padding-top: 1rem;
+    text-align: left;
+    font-size: 1.7rem;
+}
+
+.main .container .date {
+    grid-column: 1/10;
+    grid-row: 4/5;
+    text-align: center;
+    margin: 5rem 0;
+    font-size: 1.5rem;
+}
+
+.main .container .date__appear {
     font-weight: 600;
-    padding: 0.1em 0.5em;
-    border: solid 1px #d3d3d3;
-    box-shadow: 0 2px 6px rgba(100, 100, 100, 0.2);
-    margin-bottom: 6px;
-    height: 39px;
-    padding-left: 13px;
-    padding-top: 13px;
+    margin: 0 2rem;
 }
 
-
-/* 問題のcss */
-
-.quiz .answer_valid {
-    background-color: #08b3f0;
-    color: #ffffff;
+.main .container .date__back,
+.main .container .date__front {
+    color: #81a8fd;
+    font-weight: 900;
+    cursor: pointer;
 }
 
-
-/* 正解の選択肢 */
-
-.quiz .answer_invalid {
-    background-color: #fd6647;
-    color: #ffffff;
-}
-
-
-/* 不正解の選択肢 */
-
-.quiz .answerbox {
+.main .container .sp__push {
     display: none;
-    height: 77px;
-    line-height: 30px;
+}
+
+.push__button {
+    display: block;
+    height: 4rem;
+    width: 18rem;
+    margin: 0 auto;
+    background-image: linear-gradient(to right, #1424fc 0%, #05d5fa 100%);
+    box-shadow: 0.15rem 0.3rem 1rem 0.2rem #88e1fc;
+    border-radius: 3rem;
+    padding: 1rem 3rem;
+    font-size: 1.5rem;
+    text-align: center;
+    color: white;
 }
 
 
-/* 解答のハコ */
+/* ==============================
+  modal
+  ============================== */
 
-.quiz .answerbox_valid {
-    background: linear-gradient(transparent 70%, #08b3f0 0);
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+html.modalset {
+    overflow: hidden;
+}
+
+.modals {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+}
+
+.modal-wrap {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 2rem;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    white-space: nowrap;
+}
+
+.modal-wrap::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-wrap:after {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 0.1rem;
+    height: 100%;
+}
+
+.modal-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(51, 51, 51, 0.8);
+    width: 100%;
+    height: 100%;
+}
+
+.modal-box {
+    width: 100%;
+    max-width: 90rem;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+}
+
+.modal__inners {
+    background: #fff;
+    padding: 3rem 5.6rem;
+    text-align: left;
+    width: 90rem;
+    height: 50rem;
+    border-radius: 5rem;
+}
+
+.modal-box .inner> :first-child {
+    margin-top: 0;
+}
+
+.modal__inner__list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 38rem;
+}
+
+.modal__inner__item {
+    margin-bottom: 3rem;
+    font-size: 1.3rem;
+    font-weight: 550;
+}
+
+.modal__inner__close {
+    text-align: right;
+}
+
+.modal__inner__close span {
+    cursor: pointer;
+    padding: 0 0.6rem;
+    font-size: 2rem;
+    line-height: 3rem;
+    display: inline-block;
+    background-color: gainsboro;
+    border-radius: 50%;
+    height: 3rem;
+    width: 3rem;
+}
+
+.modal__inner__loading {
+    height: 25rem;
+    width: 25rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.modal__inner__loading img {
+    width: 100%;
+    height: 100%;
+    animation: spin 1s ease-in-out infinite;
+}
+
+.modal__inner__complete {
+    width: 15rem;
+    height: 20rem;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.modal__inner2 {
+    position: relative;
+    display: none;
+    height: 100%;
+}
+
+.modal__inner3 {
+    display: none;
+    position: relative;
+    height: 100%;
+}
+
+.modal input[type=checkbox] {
+    border-radius: 50%;
+}
+
+.modal input[type=text],
+.modal input[type=date] {
+    background-color: gainsboro;
+    height: 4rem;
+    width: 37.4rem;
+    border-radius: 1rem;
+}
+
+.modal input[type=text][name=twitter],
+.modal input[type=date][name=twitter] {
+    height: 20rem;
+}
+
+.modal .checkbox__item {
+    background-color: gainsboro;
+    padding: 0 1rem;
+    margin-bottom: 0.5rem;
+    height: 3.5rem;
+    display: inline-block;
+    border-radius: 2rem;
+    text-align: center;
+    line-height: 3.5rem;
+    font-size: 1.7rem;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 800px) {
+    html {
+        font-size: 3px;
+    }
+    .header {
+        grid-template-columns: 10rem 10rem auto;
+    }
+    .header__submit {
+        display: none;
+    }
+    .main .container {
+        width: 61rem;
+        grid-template-columns: 19rem 2rem 8.5rem 2rem 8.5rem 2rem 19rem;
+        grid-template-rows: 20rem 4rem 30rem 2rem 50rem auto auto;
+    }
+    .main .container .record {
+        font-size: 2.5rem;
+    }
+    .main .container .record__hour {
+        font-size: 2.5rem;
+    }
+    .main .container .record input {
+        font-size: 5rem;
+    }
+    .main .container .record .option__item {
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding-left: 0rem;
+    }
+    .main .container .today__number {
+        grid-column: 1/2;
+        grid-row: 1/2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .main .container .month__number {
+        grid-column: 3/6;
+        grid-row: 1/2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .main .container .total__number {
+        grid-column: 7/8;
+        grid-row: 1/2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .main .container .month__report {
+        grid-column: 1/8;
+        grid-row: 3/4;
+    }
+    .main .container .languages__report {
+        grid-column: 5/8;
+        grid-row: 5/6;
+    }
+    .main .container .contents__report {
+        grid-column: 1/4;
+        grid-row: 5/6;
+    }
+    .main .container .date {
+        grid-column: 1/8;
+        grid-row: 6/7;
+        text-align: center;
+    }
+    .main .container .sp__push {
+        display: block;
+        grid-column: 1/8;
+        grid-row: 7/8;
+    }
+    .modal .samplemodal-box {
+        width: 100%;
+        max-width: 90rem;
+        vertical-align: bottom;
+        position: relative;
+    }
+    .modal__inners {
+        height: 90rem;
+    }
+    .modal__inner__list {
+        height: auto;
+    }
+    .modal input[type=text],
+    .modal input[type=date] {
+        width: auto;
+    }
+    .modal .checkbox__item {
+        height: 4rem;
+        line-height: 4rem;
+        font-size: 2rem;
+    }
+    .push__button {
+        height: 7rem;
+        width: 60rem;
+        font-size: 2.5rem;
+        padding: 1rem;
+        margin-bottom: 5rem;
+        border-radius: 5rem;
+    }
+}
+
+* {
+    box-sizing: border-box;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+html {
+    font-size: 10px;
+    background-color: rgba(202, 203, 204, 0.3);
+}
+
+@media screen and (max-width: 1200px) {
+    html {
+        font-size: 8px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    html {
+        font-size: 7px;
+    }
 }
 
 
-/* 正解だった時の解答のハコ */
-
-.quiz .answerbox_invalid {
-    background: linear-gradient(transparent 70%, #fd6647 0);
-}
-
-
-/* 不正解だった時の回答のハコ */
+/*# sourceMappingURL=style.css.map */

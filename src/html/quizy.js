@@ -1,124 +1,164 @@
-'use strict'
+//棒グラフ
+var monthly = document.getElementById("monthly__statistics");
 
-//配列の箱を作る
+var myBarChart = new Chart(monthly, {
+    type: 'bar',
+    data: {
+        labels: ["", "2", "", "4", "", "6", "", "8", "", "10", "", "12", "", "14", "", "16", "", "18", "", "20", "", "22", "", "24", "", "26", "", "30", ""],
+        datasets: [{
+            label: 's',
+            data: [6.2, 6.5, 0.3, 3.5, 5.1, 6.6, 4.7, 0, 1.1, 1, 1, 4, 2.4, 1, 1, 2.4, 0, 1, 1, 1, 3.1, 6.6, 7, 1, 3.2, 1, 1, 5],
+            backgroundColor: "rgb(0, 190, 255)",
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        tooltips: {
+            enabled: false
+        },
+        title: {
+            display: false,
+            text: '支店別 来客数'
+        },
+        scales: {
+            xAxes: [{
+                display: true,
+                gridLines: {
+                    display: false,
+                    drawBorder: false
+                },
+                ticks: {
+                    fontSize: 10,
+                    fontColor: "rgb(0, 190, 255)",
+                },
+            }],
+            yAxes: [{
+                stacked: true,
+                ticks: {
+                    suggestedMax: 8,
+                    suggestedMin: 0,
+                    stepSize: 2,
+                    fontColor: "rgb(0, 190, 255)",
+                    fontSize: 10,
+                    callback: function(value) {
+                        return value + 'h'
+                    },
+                },
+                gridLines: {
+                    display: false,
+                    drawBorder: false,
+                }
+            }]
+        },
+    },
+});
 
-var question_list = new Array();
+//パイチャート
+"use strict";
 
-//配列の中身を指定する
-//pushにすることで問題を足したいときに付け足すことができる
+let month = document.getElementById("monthly__statistics");
+let languages = document.getElementById("languages__statistics");
+let contents = document.getElementById("contents__statistics");
 
-question_list.push(['たかなわ', 'こうわ', 'たかわ'], ['かめいど', 'かめと', 'かめど']);
+/* =====================================
+chats.js
+===================================== */
 
-console.log(
-    question_list
-);
+var plugin1 = {
+    afterDatasetsDraw: function(chart) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chart.ctx;
 
-//quiz_id 問題番号
-//selected_id 回答番号
-//correct_id 正解番号
+        chart.data.datasets.forEach(function(dataset, i) {
+            var dataSum = 0;
+            dataset.data.forEach(function(element) {
+                dataSum += element;
+            });
 
-function check(quiz_id, selected_id, correct_id) {
+            var meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach(function(element, index) {
+                    // Draw the text in black, with the specified font
+                    ctx.fillStyle = "rgb(255, 255, 255)";
 
-    //回答選択後、クリックを無効化する
+                    var fontSize = 1;
+                    ctx.font = Chart.helpers.fontString(fontSize);
 
-    const selected_num = document.getElementsByName('answerlist_' + quiz_id);
-    //↑赤字はhtml要素
+                    if (dataset.data[index] > 10) {
+                        // Just naively convert to string for now
+                        var dataString =
+                            (
+                                Math.round((dataset.data[index] / dataSum) * 1000) / 10
+                            ).toString() + "%";
 
-    console.log(selected_num);
-    //何番を選択したか確認するため
+                        // Make sure alignment settings are correct
+                        ctx.textAlign = "center";
+                        ctx.textBaseline = "middle";
 
-    answerlists.forEach(answerlist => {
-        answerlist.style.pointerEvents = 'none;'
-            //answerlistは沢山あるため、forEachで一つ一つに作用するようにした
-    });
-
-    //選択した際の動きを作る
-    //その１：選択された選択肢の動き
-
-    var selectedtext = document.getElementById('answerlist_' + quiz_id + '_' + selected_id);
-    //選択した選択肢を呼び出す
-
-    var correcttext = document.getElementById('answerlist_' + quiz_id + '_' + correct_id);
-    //正解の選択肢を呼び出す
-
-    selectedtext.className = 'answer_incorrect'
-    correcttext.className = 'answer_valid'
-        //新しいクラスを付与する（上書き）
-
-    //その２：正解・不正解の動き
-
-    var answerbox = document.getElementById('answerbox_' + quiz_id);
-    //回答の際に現れる（外側のハコ）
-    var answertext = document.getElementById('answertext_' + quiz_id);
-    //回答の際に現れる（メッセージ）
-    if (selected_id == correct_id) {
-        answertext.className = 'answerbox_correct';
-        //クラス付与
-        answertext.innerText = '正解！';
-        //メッセージを直で指定している
-    } else {
-        answertext.className = 'answerbox_incorrect';
-        //クラス付与
-        answertext.innerText = '不正解！';
-        //メッセージを直で指定している
-    }
-    answerbox.style.display = 'block';
-}
-
-//問題のhtml作成
-
-function newquestion(quiz_id, select_list, correct_id) {
-    var quiz_num = document.getElementById(quiz_id);
-    var contents = '<section class="quizBig">' +
-        '<h2>' + quiz_num + '. この地名はなんて読む？</h2>' +
-        '<img src ="img/' + quiz_num + '.png">'
-        //↑問題文の型
-
-    question_list.forEach(function(selection, index)
-        //forEachのコールバック関数で、 selection_listのなかの要素selectionとその番号indexを使うぜ！ってこと
-        {
-            contents += '<li id="answerlist_' + quiz_id + '_' + (index + 1) + '" name="answerlist_' + quiz_id + '" class="answerlist" ' +
-                //ここは単純にid.name,classの付与。問題にあったselect_listを呼び出し、いい感じに並べる
-                //多分↑と↓は別物だと思う
-                'onclick="check(' + quiz_id + '_' + (index + 1) + '_' + correct_id + ')">' + selection + '</li>';
-            //onclick→クリックしたときに、さっき指定したcheck関数が処理されるよ、その時の番号は「問題番号,選択した要素の番号（+1なのは配列が0から始まるから）,選択した要素」だよ！確認してね！選択した要素をわざわざ入れているのは、check関数で使うからだよ！
-
-            //多分だけど、select_listで呼ばれてる選択肢配列はそのままどーんってサイトに出てくるんだと思う
-
-            //↑選択肢の型
-
-            contents += '<li id="answerbox_' + quiz_id + '"class="answerbox">' +
-                '<span id="answertext_' + quiz_id + '"></span><br>' +
-                '<span>正解は「' + select_list[correct_id - 1] + '」です！</span>' + '</li>' + '</ul>' + '</div >';
-            //解答の型。選択肢の配列の中で、
-            // document.getElementById('main').insertAdjacentHTML('beforeend', contents);
+                        var padding = 5;
+                        var position = element.tooltipPosition();
+                        ctx.fillText(
+                            dataString,
+                            position.x,
+                            position.y + fontSize / 2 - padding
+                        );
+                    }
+                });
+            }
         });
-    document.getElementById('main').insertAdjacentHTML('beforeend', contents);
+    },
 };
 
-// newquestion(1, 1, 1);
-// //問題を出す
+let chart1 = new Chart(languages, {
+    type: "doughnut",
+    data: {
+        // labels: ["JavaScript", "CSS", "PHP", "HTML", "Lalavel", "SQL", "SHELL", "情報システム基礎知識（その他）"],
+        datasets: [{
+            backgroundColor: [
+                "blue",
+                "rgb(91, 64, 243)",
+                "rgb(64, 147, 243)",
+                "rgb(135, 210, 245)",
+                "rgb(231, 175, 236)",
+                "rgb(97, 8, 105)",
+                "rgb(72, 29, 112)",
+                "rgb(113, 115, 235)",
+            ],
+            data: [5.9, 11.8, 23.5, 14.7, 8.8, 29.4, 5.9, 0],
+            borderWidth: [1],
+        }, ],
+    },
+    options: {
+        title: {
+            display: false,
+            text: "学習言語",
+        },
+        tooltips: {
+            enabled: false,
+        },
+    },
+    plugins: [plugin1],
+});
 
-function randomlist() {
-    question_list.forEach(function(question, index) {
-
-        // question_listは一番最初にやったやつ
-        let answer = question[0];
-        // console.log(question[0]);
-        console.log(answer);
-        //↑答えは一番前のやつだよということを確認させておく
-
-        for (var i = question.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1)); //random index
-            [question[i], question[j]] = [question[j], question[i]]; // 並べ替え
-        }
-
-        // 配列をシャッフル（Fisher-Yates shuffle）→調べてコピペした
-
-        newquestion(index + 1, question, question.indexOf(answer) + 1);
-        //問題番号,問題,問題の番号→指定した問題を生成
-    });
-
-}
-
-randomlist();
+let chart2 = new Chart(contents, {
+    type: "doughnut",
+    data: {
+        // labels: ["ドットインストール", "N予備校", "POSSE課題"],
+        datasets: [{
+            backgroundColor: ["blue", "rgb(91, 64, 243)", "rgb(64, 147, 243)"],
+            data: [94.1, 0, 5.9],
+            borderWidth: [1],
+        }, ],
+    },
+    options: {
+        title: {
+            display: false,
+            text: "学習コンテンツ",
+        },
+        tooltips: {
+            enabled: false,
+        },
+    },
+    plugins: [plugin1],
+});
