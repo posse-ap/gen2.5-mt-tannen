@@ -11,13 +11,13 @@ CREATE TABLE records (
 );
 
 INSERT INTO
-  big_questions (date, hour, language_id, content_id)
+  records (date, hour, language_id, content_id)
 VALUES
-  (2022-11-03, 7, 3, 2),
-  (2022-11-05, 2, 3, 3),
-  (2022-11-18, 3, 5, 1),
-  (2022-11-22, 12, 1, 3),
-  (2022-11-13, 5, 2, 2);
+  ("2022-11-03", 7, 3, 2),
+  ("2022-11-05", 2, 3, 3),
+  ("2022-11-18", 3, 5, 1),
+  ("2022-11-22", 12, 1, 3),
+  ("2022-11-13", 5, 2, 2);
 
 DROP TABLE IF EXISTS languages;
 CREATE TABLE languages (
@@ -39,7 +39,7 @@ VALUES
 
 DROP TABLE IF EXISTS contents;
 
-CREATE TABLE  (
+CREATE TABLE contents(
   id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   content VARCHAR(255) NOT NULL
 );
