@@ -17,36 +17,38 @@ VALUES
   ("2022-11-05", 2, 3, 3),
   ("2022-11-18", 3, 5, 1),
   ("2022-11-22", 12, 1, 3),
-  ("2022-11-13", 5, 2, 2);
+  ("2022-11-23", 5, 2, 2);
 
 DROP TABLE IF EXISTS languages;
 CREATE TABLE languages (
   id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  language VARCHAR(255) NOT NULL
+  language VARCHAR(255) NOT NULL,
+  color VARCHAR(255) NOT NULL
 );
 
 INSERT INTO languages
-(language)
+(color, language)
 VALUES
-  ("JavaScript"),
-  ("css"),
-  ("PHP"),
-  ("html"),
-  ("Laravel"),
-  ("SQL"),
-  ("SHELL"),
-  ("その他");
+  ("#729321","JavaScript"),
+  ("#629351","css"),
+  ("#429311","PHP"),
+  ("#529361","html"),
+  ("#329381","Laravel"),
+  ("#229319","SQL"),
+  ("#129312","SHELL"),
+  ("#829311","その他");
 
 DROP TABLE IF EXISTS contents;
 
 CREATE TABLE contents(
   id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  content VARCHAR(255) NOT NULL
+  content VARCHAR(255) NOT NULL,
+  color VARCHAR(255) NOT NULL
 );
 
 INSERT INTO contents
-(content)
+(color, content)
 VALUES
-  ("N予備校"),
-  ("POSSE課題"),
-  ("ドットインストール");
+  ("#729321","N予備校"),
+  ("#629321","POSSE課題"),
+  ("#529321","ドットインストール");

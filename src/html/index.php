@@ -10,13 +10,13 @@ $records = $stmt->fetchAll();
 $stmt = $db->query('SELECT sum(hour) FROM records where date = CURDATE() ');
 $today_hour = $stmt->fetch();
 
-// print_r($today_hour[0]);
+// var_dump($today_hour[0]);
 
 //月のデータを取ってくる
 $stmt = $db->query("SELECT sum(hour) FROM records WHERE DATE_FORMAT(date, '%Y%m') = DATE_FORMAT(NOW(), '%Y%m')");
 $month_hour = $stmt->fetch();
 
-// print_r($month_hour[0]);
+// var_dump($month_hour[0]);
 
 //合計のデータを取ってくる
 $stmt = $db->query('SELECT sum(hour) FROM records');
@@ -33,24 +33,28 @@ $bar_hour = $stmt->fetchAll();
 // print('</pre>');
 
 //学習言語パイチャートのための言語と学習時間を取ってくる
-$stmt = $db->query("SELECT language,sum(hour) 
+$stmt = $db->query("SELECT language,sum(hour),color 
 FROM records
 INNER JOIN languages
 ON records.language_id=languages.id
-GROUP BY language;");
+GROUP BY language, color;");
 $languagepie_hour = $stmt->fetchAll();
 
 // print_r($languagepie_hour);
 
 //学習コンテンツのためのデータを取ってくる
-$stmt = $db->query("SELECT content,sum(hour) 
+$stmt = $db->query("SELECT content,sum(hour),color 
 FROM records
 INNER JOIN contents
 ON records.content_id=contents.id
-GROUP BY content;");
+GROUP BY content, color;");
 $contentpie_hour = $stmt->fetchAll();
 
-print_r($contentpie_hour);
+// print_r($contentpie_hour);
+
+print('<pre>');
+var_dump($languagepie_hour);
+print('</pre>');
 
 ?>
 
@@ -61,9 +65,9 @@ print_r($contentpie_hour);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizy仮</title>
+    <title>webapp</title>
     <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="quizy.css">
 </head>
 
 <body>
@@ -91,7 +95,7 @@ print_r($contentpie_hour);
                 <div class="record month__number">
                     <div class="center">
                         <div class="record__title">Month</div>
-                        <?php echo $month_number[0]; ?>
+                        <?php echo $month_hour[0]; ?>
                         <span class="record__hour">hour</span>
                     </div>
                 </div>
@@ -110,26 +114,10 @@ print_r($contentpie_hour);
                     <canvas class="pie__chart" id="languages__statistics" style="position: relative; height: 30rem; width: 30rem"></canvas>
                     <ul class="option__list">
                         <?php foreach ($languagepie_hour as $language) : ?>
-                        <span class="circle" style="background-color: blue"></span>
-                        <li class="option__item"> <?php var_dump($language); ?> </li>
+                            <span class="circle" style="background-color: <?php echo $language["color"]; ?>"></span>
+                            <li class="option__item">
+                                <?php echo $language["language"] ?> </li>
                         <?php endforeach; ?>
-                        <span class="circle" style="background-color: rgb(91, 64, 243)"></span>
-                        <li class="option__item">CSS</li>
-                        <span class="circle" style="background-color: rgb(64, 147, 243)"></span>
-                        <li class="option__item">PHP</li>
-                        <br />
-                        <span class="circle" style="background-color: rgb(135, 210, 245)"></span>
-                        <li class="option__item">HTML</li>
-                        <span class="circle" style="background-color: rgb(231, 175, 236)"></span>
-                        <li class="option__item">Laravel</li>
-                        <span class="circle" style="background-color: rgb(97, 8, 105)"></span>
-                        <li class="option__item">SQL</li>
-                        <br />
-                        <span class="circle" style="background-color: rgb(72, 29, 112)"></span>
-                        <li class="option__item">SHELL</li>
-                        <br />
-                        <span class="circle" style="background-color: rgb(113, 115, 235)"></span>
-                        <li class="option__item">情報システム基礎知識(その他)</li>
                     </ul>
                 </div>
                 <div class="record contents__report">
@@ -156,8 +144,96 @@ print_r($contentpie_hour);
                 </div>
             </div>
         </main>
-        <script src="./quizy.js"></script>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+        "use strict";
+
+        let month = document.getElementById("monthly__statistics");
+        let languages = document.getElementById("languages__statistics");
+        let contents = document.getElementById("contents__statistics");
+
+        /* =====================================
+        chats.js
+        ===================================== */
+        var plugin1 = {
+            afterDatasetsDraw: function(chart) {
+                // To only draw at the end of animation, check for easing === 1
+                var ctx = chart.ctx;
+
+                chart.data.datasets.forEach(function(dataset, i) {
+                    var dataSum = 0;
+                    dataset.data.forEach(function(element) {
+                        dataSum += element;
+                    });
+
+                    var meta = chart.getDatasetMeta(i);
+                    if (!meta.hidden) {
+                        meta.data.forEach(function(element, index) {
+                            // Draw the text in black, with the specified font
+                            ctx.fillStyle = "rgb(255, 255, 255)";
+
+                            var fontSize = 1;
+                            ctx.font = Chart.helpers.fontString(fontSize);
+
+                            if (dataset.data[index] > 10) {
+                                // Just naively convert to string for now
+                                var dataString =
+                                    (
+                                        Math.round((dataset.data[index] / dataSum) * 1000) / 10
+                                    ).toString() + "%";
+
+                                // Make sure alignment settings are correct
+                                ctx.textAlign = "center";
+                                ctx.textBaseline = "middle";
+
+                                var padding = 5;
+                                var position = element.tooltipPosition();
+                                ctx.fillText(
+                                    dataString,
+                                    position.x,
+                                    position.y + fontSize / 2 - padding
+                                );
+                            }
+                        });
+                    }
+                });
+            },
+        };
+        let chart1 = new Chart(languages, {
+                type: "doughnut",
+                data: [
+                    <?php foreach ($languagepie_hour as $language) :
+                        echo $language['sum(hour)'] . ',';
+                    endforeach; ?>
+                ],
+            },
+
+        );
+
+        let chart2 = new Chart(contents, {
+            type: "doughnut",
+            data: {
+                // labels: ["ドットインストール", "N予備校", "POSSE課題"],
+                datasets: [
+                    <?php foreach ($contentpie_hour as $content) :
+                        echo $content['sum(hour)'] . ',';
+                    endforeach; ?>
+                ],
+            },
+            options: {
+                title: {
+                    display: false,
+                    text: "学習コンテンツ",
+                },
+                tooltips: {
+                    enabled: false,
+                },
+            },
+            plugins: [plugin1],
+        });
+    </script>
 </body>
 
 </html>
